@@ -1,6 +1,5 @@
 import { AppBar, Box, InputBase, Container, IconButton, Toolbar, Typography, alpha, styled } from '@mui/material'
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
+import {SearchIcon, MenuIcon} from '@mui/icons-material';
 
 import React from 'react'
 
