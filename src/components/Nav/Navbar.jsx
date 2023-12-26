@@ -43,9 +43,9 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
       },
       [theme.breakpoints.up('sm')]: {
         width: '12ch',
-        '&:focus': {
-          width: '17ch',
-        },
+        // '&:focus': {
+        //   width: '17ch',
+        // },
       },
     },
   }));
