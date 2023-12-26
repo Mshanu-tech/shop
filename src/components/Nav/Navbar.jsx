@@ -12,7 +12,7 @@ const Search = styled('div')(({ theme }) => ({
  backgroundColor: alpha(theme.palette.common.white, 0.25),
  },
  marginLeft:0,
- width:'100%',
+ width:'34%',
  [theme.breakpoints.up('sm')]: {
  marginLeft: theme.spacing(1),
  width: 'auto',
@@ -43,14 +43,18 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
       },
       [theme.breakpoints.up('sm')]: {
         width: '12ch',
-        // '&:focus': {
-        //   width: '17ch',
-        // },
+        '&:focus': {
+          width: '13ch',
+        },
       },
     },
   }));
 
 function Nav() {
+
+  const handleLogin = () =>{
+    console.log("Login");
+  }
     
   return (
     <>
@@ -71,11 +75,14 @@ function Nav() {
               inputProps={{ 'aria-label': 'search' }}
             />
                     </Search>
-                
-                    <Typography variant='h6'>
+                <Box sx={{width:"16%"}}>
+                <Typography variant='h6' sx={{fontSize:"30px", fontWeight:'bold'}}>
                         SHOP
                     </Typography>
-                    <LoginSharpIcon/>
+                </Box>
+                <Box onClick={handleLogin} >
+                <LoginSharpIcon />
+                </Box>
                 </Toolbar>
             </AppBar>
         </Box>

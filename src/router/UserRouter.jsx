@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom'
 import UserLogin from '../Pages/Users/UserLogin'
 import Home from '../Pages/Users/Home';
 function UserRouter() {
-  console.log("user");
   return (
     <>
     <Routes>
