@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   AppBar,
   Box,
@@ -7,13 +8,11 @@ import {
   Typography,
   alpha,
   styled,
+  Popover,
+  Button,
 } from "@mui/material";
 import LoginSharpIcon from "@mui/icons-material/LoginSharp";
 import SearchIcon from "@mui/icons-material/Search";
-import Popover from "@mui/material/Popover";
-import Button from "@mui/material/Button";
-
-import React, { useState } from "react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -63,32 +62,30 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function Nav() {
   const [anchorEl, setAnchorEl] = useState(null);
-  const handleLogin = () => {
-    console.log("Login");
-  };
 
-  const handleClick = (event) => {
-    console.log(event.currentTarget);
+  const handleLoginClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handlePopoverClose = () => {
     setAnchorEl(null);
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const id = open ? "login-popover" : undefined;
 
+  const handleLogin = () => {
+    console.log("Login");
+  }
+  const handleGoogleLogin = () => {
+    console.log("googleLogin");
+  }
   return (
     <>
       <Container>
         <Box sx={{ flexGrow: 1 }}>
           <AppBar sx={{ background: "white", color: "black" }}>
             <Toolbar sx={{ justifyContent: "space-between" }}>
-              {/* <IconButton>
-                        <MenuIcon/>
-                    </IconButton> */}
-
               <Search>
                 <SearchIconWrapper>
                   <SearchIcon />
@@ -98,7 +95,15 @@ function Nav() {
                   inputProps={{ "aria-label": "search" }}
                 />
               </Search>
-              <Box sx={{ width: "16%" }}>
+              <Box
+                sx={{
+                  width: "16%",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  backgroundImage: `url('https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg')`,
+                  backgroundSize: "cover",
+                }}
+              >
                 <Typography
                   variant="h6"
                   sx={{ fontSize: "30px", fontWeight: "bold" }}
@@ -106,32 +111,30 @@ function Nav() {
                   SHOP
                 </Typography>
               </Box>
-              <Box onClick={handleLogin}>
+              <Box onClick={handleLoginClick} sx={{ cursor: "pointer" }}>
                 <LoginSharpIcon />
               </Box>
+              <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handlePopoverClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+              >
+                <Box sx={{ padding: "10px" }}>
+                  <Button variant="outer-contained" onClick={handleGoogleLogin}>
+                    Google
+                  </Button>
+                  <Button variant="contained" onClick={handleLogin}>
+                    Login
+                  </Button>
+                </Box>
+              </Popover>
             </Toolbar>
           </AppBar>
-          <div>
-            <Button
-              aria-describedby={id}
-              variant="contained"
-              onClick={handleClick}
-            >
-              Open Popover
-            </Button>
-            <Popover
-              id={id}
-              open={open}
-              anchorEl={anchorEl}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-            >
-              <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
-            </Popover>
-          </div>
         </Box>
       </Container>
     </>
