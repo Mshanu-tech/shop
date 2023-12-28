@@ -14,6 +14,7 @@ import {
 import LoginSharpIcon from "@mui/icons-material/LoginSharp";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
+import { userIsLoggedin } from "../../api/userApi";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,7 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Nav() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleLoginClick = (event) => {
@@ -77,12 +78,12 @@ function Nav() {
   const id = open ? "login-popover" : undefined;
 
   const handleLogin = () => {
-navigate('login')
+    navigate("login");
     console.log("Login");
-  }
+  };
   const handleGoogleLogin = () => {
     console.log("googleLogin");
-  }
+  };
   return (
     <>
       <Container>
@@ -114,9 +115,13 @@ navigate('login')
                   SHOP
                 </Typography>
               </Box>
-              <Box onClick={handleLoginClick} sx={{ cursor: "pointer" }}>
-                <LoginSharpIcon />
-              </Box>
+              {userIsLoggedin ? (
+                <Button>M</Button>
+              ) : (
+                <Box onClick={handleLoginClick} sx={{ cursor: "pointer" }}>
+                  <LoginSharpIcon />
+                </Box>
+              )}
               <Popover
                 id={id}
                 open={open}
